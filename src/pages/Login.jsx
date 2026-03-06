@@ -14,7 +14,7 @@ function Login() {
       setError('Please Enter Valid Email And Password!')
       return
     }
-    const fakeUser = { name: 'faiz', email: email }
+    const fakeUser = { name: 'Faiz Ansari', email: email }
     const fakeToken = 'fake-token-123'
 
     login(fakeUser, fakeToken)
