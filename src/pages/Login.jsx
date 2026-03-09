@@ -8,17 +8,20 @@ function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
-   const handleLogin = () => {
-    if(email === '' || password === '') {
-      setError('Please Enter Valid Email And Password!')
-      return
+   const handleLogin = async(e) => {
+     e.preventDefault()
+    setError('')
+    setLoading(true)
+     try {
+      await login(email, password)
+      navigate('/dashboard')
+    } catch (err) {
+      setError(err.response?.data?.message || 'Login failed')
+    } finally {
+      setLoading(false)
     }
-    const fakeUser = { name: 'Faiz Ansari', email: email }
-    const fakeToken = 'fake-token-123'
-
-    login(fakeUser, fakeToken)
-    navigate('/dashboard')
   }
 
   return (

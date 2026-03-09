@@ -11,17 +11,19 @@ function Signup () {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
 
-   function handleSignUp() {
-      if(name === '' || email === '' || password === '') {
-      setError('Please Enter Valid Name, Email And Password!')
-      return
-    }
-    const fakeUser = { name: 'faiz', email: email }
-    const fakeToken = 'fake-token-123'
-
-    login(fakeUser, fakeToken)
+  const handleSignUp = async (e) => {
+  e.preventDefault()
+  setError('')
+  setLoading(true)
+  try {
+    await register(name, email, password)
     navigate('/dashboard')
+  } catch (err) {
+    setError(err.response?.data?.message || 'Registration failed')
+  } finally {
+    setLoading(false)
   }
+}
 
    return (
    <div>
