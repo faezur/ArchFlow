@@ -16,6 +16,18 @@ export function AuthProvider({ children }) {
     return res.data
   }
 
+  const loginWithGoogle = async (token) => {
+  localStorage.setItem('token', token);
+  setToken(token);
+
+  // User info fetch
+  const res = await API.get('/auth/me', {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  setUser(res.data);
+  localStorage.setItem('user', JSON.stringify(res.data));
+};
+
   const register = async (name, email, password) => {
     const res = await API.post('/auth/register', { name, email, password })
     setUser(res.data)
@@ -33,7 +45,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, token, login, register, logout }}>
+    <AuthContext.Provider value={{ user, token, login, register, logout, loginWithGoogle }}>
       {children}
     </AuthContext.Provider>
   )
