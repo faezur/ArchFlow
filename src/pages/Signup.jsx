@@ -98,7 +98,7 @@ function Signup() {
               </>
             ) : 'Sign Up'}
           </button>
-          <button onClick={() => window.location.href = 'http://localhost:5000/api/auth/google'}>
+          <button onClick={() => window.location.href = 'https://archflow-backend.onrender.com/api/auth/google'}>
             Login with Google
           </button>
 

@@ -9,6 +9,7 @@ function Login() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -85,7 +86,7 @@ function Login() {
               </>
             ) : 'Login'}
           </button>
-          <button onClick={() => window.location.href = 'http://localhost:5000/api/auth/google'}>
+          <button onClick={() => window.location.href = 'https://archflow-backend.onrender.com/api/auth/google'}>
             Countinue with Google Account...
           </button>
 
