@@ -10,9 +10,8 @@
 
 ---
 
-##  Links 
+## 🔗 Links
 - **Live Demo:** [arch-flow-mu.vercel.app](https://arch-flow-mu.vercel.app)
-- **Backend API:** [archflow-backend.onrender.com](https://archflow-backend.onrender.com)
 - **Frontend Repo:** [github.com/faezur/archflow](https://github.com/faezur/archflow)
 - **Backend Repo:** [github.com/faezur/archflow-backend](https://github.com/faezur/archflow-backend)
 
@@ -21,35 +20,35 @@
 ## 📸 Screenshots
 
 ### Home Page
-![Home Page](./screenshots/home.png)
+![Home Page](./screenshot/home.png)
 
 ### Generate Page
-![Generate Page](./screenshots/generate.png)
+![Generate Page](./screenshot/generate.png)
 
 ### History Page
-![History Page](./screenshots/history.png)
+![History Page](./screenshot/history.png)
 
 ### 3D Render Result
-![3D Render](./screenshots/render-result.png)
+![3D Render](./screenshot/result.png)
 
 ---
 
-##  Features 
+##  Features
 
--  **Floor Plan Upload** — Drag & drop or click to upload 2D floor plan 
--  **AI Analysis** — AI analyzes rooms, dimensions and spatial layout 
--  **3D Render Generation** — Photorealistic top-down architectural render 
--  **JWT Authentication** — Secure register & login 
-- **Google OAuth** — One click sign in with Google 
--  **Render History** — View, download and delete your renders 
--  **Image Compare Slider** — Compare original vs generated 
--  **Cloud Storage** — Images stored on Cloudinary 
-- **Fully Responsive** — Works on all screen sizes 
-- **Retry Logic** — Auto retry on API rate limits 
+-  **Floor Plan Upload** — Drag & drop or click to upload 2D floor plan
+-  **AI Analysis** — AI analyzes rooms, dimensions and spatial layout
+-  **3D Render Generation** — Photorealistic top-down architectural render
+-  **JWT Authentication** — Secure register & login
+-  **Google OAuth** — One click sign in with Google
+-  **Render History** — View, download and delete your renders
+-  **Image Compare Slider** — Compare original vs generated
+-  **Cloud Storage** — All images stored on cloud
+-  **Fully Responsive** — Works on all screen sizes
+-  **Retry Logic** — Auto retry on API rate limits
 
 ---
 
-## Tech Stack 
+##  Tech Stack
 
 | Category | Technology |
 |----------|-----------|
@@ -57,18 +56,18 @@
 | Backend | Node.js, Express.js |
 | Database | MongoDB Atlas, Mongoose |
 | Auth | JWT, bcryptjs, Passport.js, Google OAuth 2.0 |
-| AI | Groq Vision AI, Stability AI |
+| AI | Vision AI Analysis, Image Generation AI |
 | Storage | Cloudinary, Multer |
 | Deploy | Vercel (Frontend), Render.com (Backend) |
 
 ---
 
-##  AI Flow 
+##  AI Flow
 
 ```
 1. User uploads 2D floor plan image
         ↓
-2. Image saved to Cloudinary
+2. Image saved to cloud storage
         ↓
 3. AI analyzes floor plan
    → Identifies rooms & positions
@@ -77,58 +76,16 @@
         ↓
 4. Detailed prompt generated
         ↓
-5. Stability AI generates 3D render
+5. AI generates photorealistic 3D render
         ↓
-6. Generated image saved to Cloudinary
+6. Generated image saved to cloud
         ↓
-7. Result saved to MongoDB & displayed
+7. Result saved to database & displayed
 ```
 
 ---
 
-##  Installation & Setup 
-
-### Prerequisites
-- Node.js 18+
-- MongoDB Atlas account
-- Cloudinary account
-- Groq API key
-- Stability AI API key
-- Google OAuth credentials
-
-### Backend Setup
-```bash
-git clone https://github.com/faezur/archflow-backend
-cd archflow-backend
-npm install
-```
-
-Create `.env` file:
-```
-
-```bash
-node server.js
-```
-
-### Frontend Setup
-```bash
-git clone https://github.com/faezur/archflow
-cd archflow
-npm install
-```
-
-Create `.env` file:
-```env
-VITE_API_URL=http://localhost:5000/api
-```
-
-```bash
-npm run dev
-```
-
----
-
-## API Endpoints 
+##  API Endpoints
 
 | Method | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
@@ -143,25 +100,25 @@ npm run dev
 
 ---
 
-##  Deployment 
+##  Deployment
 
-| Service | Platform | URL |
-|---------|----------|-----|
-| Frontend | Vercel | [arch-flow-mu.vercel.app](https://arch-flow-mu.vercel.app) |
-| Backend | Render.com | [archflow-backend.onrender.com](https://archflow-backend.onrender.com) |
-| Database | MongoDB Atlas | Cloud hosted |
+| Service | Platform |
+|---------|----------|
+| Frontend | Vercel |
+| Backend | Render.com |
+| Database | MongoDB Atlas |
 
 ---
 
-##  Author 
+##  Author
 
-**Faiz Ansari** 
+**Faiz Ansari**
 - GitHub: [@faezur](https://github.com/faezur)
 - Email: faezur@gmail.com
-- LinkedIn: [linkedin.com/in/faezur](https://linkedin.com/in/faezur)
+- LinkedIn: [linkedin.com/in/faizansari](https://linkedin.com/in/faizansari)
 
 ---
 
 ## 📄 License
 
-MIT License — feel free to use this project for learning purposes.
+MIT License
