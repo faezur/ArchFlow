@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import api from '../api/axios'
-import ImageCompare from "../components/ImageCompare"
 
 export default function History() {
   const [renders, setRenders] = useState([])
@@ -49,7 +48,7 @@ export default function History() {
     <div className="min-h-screen flex items-center justify-center bg-zinc-950">
       <div className="flex flex-col items-center gap-4">
         <div className="w-8 h-8 border-2 border-amber-400 border-t-transparent rounded-full animate-spin" />
-        <p className="text-zinc-500 text-sm tracking-widest uppercase">Loading</p>
+        <p className="text-zinc-500 text-xs tracking-widest font-mono">LOADING HISTORY</p>
       </div>
     </div>
   )
@@ -57,56 +56,69 @@ export default function History() {
   return (
     <div className="min-h-screen bg-zinc-950 text-white">
 
-      {/* Image Modal */}
+      {/* ── Lightbox ── */}
       {selectedImage && (
         <div
-          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 md:p-6"
+          className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-6"
           onClick={() => setSelectedImage(null)}
         >
-          <button className="absolute top-4 right-4 w-9 h-9 bg-zinc-800 rounded-full flex items-center justify-center text-zinc-400 hover:text-white text-lg">✕</button>
-          <img
-            src={selectedImage}
-            alt="Full view"
-            className="w-full max-w-4xl max-h-[90vh] object-contain rounded-xl"
-            onClick={e => e.stopPropagation()}
-          />
+          <div className="relative" onClick={e => e.stopPropagation()}>
+            <img
+              src={selectedImage}
+              alt="Full view"
+              className="max-w-[90vw] max-h-[85vh] object-contain rounded-2xl shadow-2xl"
+            />
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute -top-3 -right-3 w-8 h-8 bg-amber-400 text-zinc-950 font-bold rounded-full flex items-center justify-center hover:bg-amber-300 transition-colors"
+            >
+              ✕
+            </button>
+          </div>
         </div>
       )}
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16">
 
-        {/* Header */}
-        <div className="mb-8 md:mb-10">
-          <h1 className="text-2xl md:text-3xl font-bold">
+        {/* ── Header ── */}
+        <div className="mb-10">
+          <span className="inline-block text-xs font-mono tracking-widest text-amber-400 bg-amber-400/10 border border-amber-400/20 px-3 py-1 rounded mb-4">
+            ARCHFLOW AI
+          </span>
+          <h1 className="text-3xl font-bold tracking-tight">
             Render <span className="text-amber-400">History</span>
           </h1>
-          <p className="text-zinc-400 text-sm mt-1">
+          <p className="text-zinc-500 text-sm mt-1 font-mono">
             {renders.length} render{renders.length !== 1 ? 's' : ''} generated
           </p>
         </div>
 
-        {/* Empty State */}
+        {/* ── Empty State ── */}
         {renders.length === 0 && (
-          <div className="flex flex-col items-center justify-center py-24 gap-4">
-            <span className="text-5xl">📐</span>
-            <p className="text-zinc-400 text-sm">No renders yet</p>
+          <div className="flex flex-col items-center justify-center py-24 gap-4 border border-zinc-800 rounded-2xl bg-zinc-900">
+            <span className="text-5xl">🏗️</span>
+            <p className="text-zinc-400 text-sm font-mono">No renders yet</p>
           </div>
         )}
 
-        {/* Render Cards — 1 col mobile, 2 col desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-          {renders.map((render) => (
+        {/* ── Render Cards ── */}
+        <div className="flex flex-col gap-5">
+          {renders.map((render, i) => (
             <div
               key={render._id}
-              className="bg-zinc-900 border border-zinc-800 rounded-xl p-3 sm:p-4 hover:border-amber-400/30 transition"
+              className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden hover:border-amber-400/30 transition-all duration-300"
+              style={{ animation: `fadeUp 0.45s ease ${i * 0.07}s both` }}
             >
-              {/* Meta */}
-              <div className="flex justify-between items-center mb-3 md:mb-4">
-                <span className="text-amber-400 font-semibold text-sm">
-                  {render.bhk || 'Floor Plan'}
-                </span>
-                <div className="flex items-center gap-3 md:gap-4">
-                  <span className="text-zinc-500 text-xs">
+              {/* ── Card Header ── */}
+              <div className="flex justify-between items-center px-4 py-3 border-b border-zinc-800">
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                  <span className="text-amber-400 font-semibold text-sm font-mono">
+                    3D Architectural Render
+                  </span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span className="text-zinc-500 text-xs font-mono">
                     {new Date(render.createdAt).toLocaleDateString('en-IN', {
                       day: 'numeric', month: 'short', year: 'numeric'
                     })}
@@ -114,34 +126,62 @@ export default function History() {
                   <button
                     onClick={() => handleDelete(render._id)}
                     disabled={deletingId === render._id}
-                    className="text-xs text-zinc-500 hover:text-red-400 transition-colors disabled:opacity-50"
+                    className="text-xs text-zinc-600 hover:text-red-400 transition-colors disabled:opacity-50 font-mono"
                   >
-                    {deletingId === render._id ? '...' : 'Delete'}
+                    {deletingId === render._id ? '...' : '✕ Delete'}
                   </button>
                 </div>
               </div>
 
-              {/* Compare Slider */}
-              <div className="rounded-lg overflow-hidden">
-                <ImageCompare
-                  before={render.imageUrl}
-                  after={render.generatedImageUrl}
-                />
+              {/* ── Side by Side Images ── */}
+              <div className="grid grid-cols-2">
+
+                {/* Left — Original Floor Plan */}
+                <div
+                  className="relative bg-zinc-950 cursor-pointer group border-r border-zinc-800"
+                  onClick={() => setSelectedImage(render.imageUrl)}
+                >
+                  <img
+                    src={render.imageUrl}
+                    alt="Original floor plan"
+                    className="w-full h-64 object-contain p-2 transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-3 py-2">
+                    <span className="text-xs font-mono text-zinc-400 tracking-widest">FLOOR PLAN</span>
+                  </div>
+                </div>
+
+                {/* Right — Generated 3D Render */}
+                <div
+                  className="relative bg-zinc-950 cursor-pointer group"
+                  onClick={() => setSelectedImage(render.generatedImageUrl)}
+                >
+                  <img
+                    src={render.generatedImageUrl}
+                    alt="Generated 3D render"
+                    className="w-full h-64 object-contain p-2 transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-3 py-2">
+                    <span className="text-xs font-mono text-amber-400 tracking-widest">3D RENDER</span>
+                  </div>
+                  {/* AI Badge */}
+                  <div className="absolute top-2 right-2">
+                    <span className="text-xs font-mono text-amber-400 bg-black/70 backdrop-blur-sm border border-amber-400/30 px-2 py-0.5 rounded">
+                      AI
+                    </span>
+                  </div>
+                </div>
+
               </div>
 
-              {/* Actions */}
-              <div className="flex justify-between items-center mt-3 md:mt-4">
-                <button
-                  onClick={() => setSelectedImage(render.generatedImageUrl)}
-                  className="text-xs text-zinc-400 hover:text-white transition-colors px-2 py-1"
-                >
-                  View Full
-                </button>
+              {/* ── Card Footer ── */}
+              <div className="flex justify-end items-center px-4 py-3 border-t border-zinc-800 ">
+                
                 <button
                   onClick={() => handleDownload(render.generatedImageUrl)}
-                  className="text-xs bg-amber-400 text-black px-3 py-1.5 rounded-lg hover:bg-amber-300 transition-colors font-medium"
+                  className="text-xs bg-amber-400 text-zinc-950 px-4 py-1.5 rounded-lg hover:bg-amber-300 transition-colors font-bold tracking-wide"
                 >
-                  ↓ Download
+                  ↓ DOWNLOAD
                 </button>
               </div>
 
@@ -150,6 +190,13 @@ export default function History() {
         </div>
 
       </div>
+
+      <style>{`
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(14px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </div>
   )
 }

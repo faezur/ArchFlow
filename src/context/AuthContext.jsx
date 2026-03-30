@@ -20,7 +20,6 @@ export function AuthProvider({ children }) {
   localStorage.setItem('token', token);
   setToken(token);
 
-  // User info fetch
   const res = await API.get('/auth/me', {
     headers: { Authorization: `Bearer ${token}` }
   });
