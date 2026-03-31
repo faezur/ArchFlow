@@ -34,7 +34,7 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2" onClick={() => setMenuOpen(false)}>
-          <div className="w-7 h-7 bg-amber-400 rounded-sm rotate-12"></div>
+          <img src="/4.svg" alt="logo" className="w-7 h-7 object-contain"/>
           <span className="text-white font-bold text-xl tracking-tight">
             Arch<span className="text-amber-400">Flow</span>
           </span>
