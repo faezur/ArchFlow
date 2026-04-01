@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
+
 export default function Navbar() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
@@ -67,7 +68,7 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Auth */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-4 w-[100px] justify-end">
           {user ? (
             <>
               <span className="text-zinc-400 text-sm">Hi, <span className="text-white">{user.name}</span></span>
@@ -76,9 +77,11 @@ export default function Navbar() {
               </button>
             </>
           ) : (
+            location.pathname !== "/login" && location.pathname !== "/signup" && (
             <Link to="/login" className="text-sm px-4 py-1.5 bg-amber-400 text-zinc-950 font-semibold rounded-full hover:bg-amber-300 transition-colors">
               Login
             </Link>
+            )
           )}
         </div>
 

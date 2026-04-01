@@ -17,7 +17,7 @@ function Login() {
     setLoading(true)
     try {
       await login(email, password)
-      navigate('/generate')
+      navigate('/')
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed')
     } finally {
@@ -32,8 +32,8 @@ function Login() {
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 mb-6">
-            <div className="w-7 h-7 bg-amber-400 rounded-sm rotate-12"></div>
-            <span className="text-white font-bold text-xl tracking-tight">
+            <img src="/4.svg" alt="logo" className="w-7 h-7 object-contain"/>
+          <span className="text-white font-bold text-xl tracking-tight">
               Arch<span className="text-amber-400">Flow</span>
             </span>
           </div>
