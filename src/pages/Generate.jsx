@@ -102,7 +102,7 @@ export default function Generate() {
       setDoneSteps([0, 1])
       setActiveStep(2)
 
-      // Typewriter starts — prompt appears on right side
+      
       setLivePrompt(groqPrompt)
       setPromptVisible(true)
 
@@ -204,7 +204,7 @@ export default function Generate() {
                 <>
                   <div className="w-14 h-14 bg-zinc-800 border border-zinc-700 rounded-full flex items-center justify-center text-2xl">📐</div>
                   <p className="text-zinc-400 text-sm">{drag ? 'Drop it here!' : 'Click or drag & drop your floor plan'}</p>
-                  <p className="text-zinc-600 text-xs font-mono">PNG · JPG · WEBP</p>
+                  <p className="text-zinc-600 text-xs font-mono">· JPG ·</p>
                 </>
               )}
             </div>
