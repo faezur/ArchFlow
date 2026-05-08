@@ -27,7 +27,7 @@ export function AuthProvider({ children }) {
         localStorage.setItem('user', JSON.stringify(res.data))
         localStorage.setItem('token', res.data.token)
         setShowDemoToast(true)
-        setTimeout(() => setShowDemoToast(false), 4000)
+        setTimeout(() => setShowDemoToast(false), 5000)
       } catch (err) {
         console.error('Auto-login failed:', err)
       }
@@ -78,24 +78,72 @@ export function AuthProvider({ children }) {
       {children}
 
       {/* Demo Toast */}
-      {showDemoToast && (
-        <div style={{
-          position: 'fixed',
-          bottom: '24px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          background: '#1a1a1a',
+{/* Demo Toast */}
+{showDemoToast && (
+  <div
+    style={{
+      position: 'fixed',
+      top: '90px',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      zIndex: 9999,
+      animation: 'fadeSlide 3s ease',
+    }}
+  >
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px',
+        padding: '12px 24px',
+        minWidth: '420px',
+        borderRadius: '12px',
+        background: 'rgba(25,25,25,0.92)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        boxShadow: '0 6px 18px rgba(0,0,0,0.25)',
+        backdropFilter: 'blur(6px)',
+      }}
+    >
+      {/* Status Dot */}
+      <div
+        style={{
+          width: '10px',
+          height: '10px',
+          borderRadius: '50%',
+          background: '#ff3b3b',
+          flexShrink: 0,
+        }}
+      />
+
+      {/* Text */}
+      <div
+        style={{
           color: '#fff',
-          padding: '12px 24px',
-          borderRadius: '8px',
           fontSize: '14px',
-          zIndex: 9999,
-          boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-          whiteSpace: 'nowrap'
-        }}>
-          🔍 Demo mode — logged in as test user
-        </div>
-      )}
+          fontWeight: '500',
+          letterSpacing: '0.2px',
+        }}
+      >
+      ArchFlow Preview Mode — Exploring as Guest
+      </div>
+    </div>
+
+    <style>
+      {`
+        @keyframes fadeSlide {
+          from {
+            opacity: 0;
+            transform: translate(-50%, -10px);
+          }
+          to {
+            opacity: 1;
+            transform: translate(-50%, 0);
+          }
+        }
+      `}
+    </style>
+  </div>
+)}
     </AuthContext.Provider>
   )
 }
