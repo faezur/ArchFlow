@@ -12,28 +12,29 @@ export function AuthProvider({ children }) {
   const [showDemoToast, setShowDemoToast] = useState(false)
 
 
-  // Auto-login if no user
   useEffect(() => {
-    const autoLogin = async () => {
-      if (!localStorage.getItem('token')) {
-        try {
-          const res = await API.post('/auth/login', { 
-            email: DEMO_EMAIL, 
-            password: DEMO_PASSWORD 
-          })
-          setUser(res.data)
-          setToken(res.data.token)
-          localStorage.setItem('user', JSON.stringify(res.data))
-          localStorage.setItem('token', res.data.token)
-          setShowDemoToast(true)
-          setTimeout(() => setShowDemoToast(false), 4000)
-        } catch (err) {
-          console.error('Auto-login failed:', err)
-        }
+  const autoLogin = async () => {
+    if (!localStorage.getItem('token')) {
+      // Render cold start ke liye 3 sec wait karo
+      await new Promise(r => setTimeout(r, 3000));
+      try {
+        const res = await API.post('/auth/login', {
+          email: DEMO_EMAIL,
+          password: DEMO_PASSWORD
+        })
+        setUser(res.data)
+        setToken(res.data.token)
+        localStorage.setItem('user', JSON.stringify(res.data))
+        localStorage.setItem('token', res.data.token)
+        setShowDemoToast(true)
+        setTimeout(() => setShowDemoToast(false), 4000)
+      } catch (err) {
+        console.error('Auto-login failed:', err)
       }
     }
-    autoLogin()
-  }, [])
+  }
+  autoLogin()
+}, [])
 
 
   const login = async (email, password) => {
