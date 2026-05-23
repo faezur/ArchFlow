@@ -16,8 +16,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
   const autoLogin = async () => {
     if (!localStorage.getItem('token')) {
-      // Render cold start ke liye 3 sec wait karo
-      await new Promise(r => setTimeout(r, 3000));
+      await new Promise(r => setTimeout(r, 1000));
       try {
         const res = await API.post('/auth/login', {
           email: DEMO_EMAIL,
