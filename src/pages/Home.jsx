@@ -2,177 +2,152 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useState } from 'react'
 
+const samples = [
+  { url: 'https://res.cloudinary.com/dnekdeqgw/image/upload/v1773174686/jlq4grxl5j1bubvocmao_xh2wlv.png', desc: 'Modern 2 BHK apartment' },
+  { url: 'https://res.cloudinary.com/dnekdeqgw/image/upload/v1773175055/1772298643692_2_k7i9dj.jpg', desc: 'Compact urban layout' },
+  { url: 'https://res.cloudinary.com/dnekdeqgw/image/upload/v1773175062/file_000000005db47209a5017ffe3e4cc660_shjhpx.png', desc: 'Luxury exterior concept' },
+  { url: 'https://res.cloudinary.com/dnekdeqgw/image/upload/v1773172206/archflow/generated/jiyqo5fsnryuduouak89.png', desc: 'Family home visualization' },
+]
+
+const plans = [
+  { name: 'Free', price: '$0', note: 'Forever free', features: ['3 renders per month', 'Basic render quality', 'Watermark included'] },
+  { name: 'Pro', price: '$9', note: 'per month', featured: true, features: ['50 renders per month', 'High quality output', 'No watermark', 'Priority support'] },
+  { name: 'Studio', price: '$29', note: 'per month', features: ['Unlimited renders', 'Highest quality', 'API access', 'Dedicated support'] },
+]
+
 export default function Home() {
-  const { user } = useAuth() 
+  const { user } = useAuth()
   const [selectedImage, setSelectedImage] = useState(null)
 
   return (
-    
-    <div className="min-h-screen bg-zinc-950 text-white">
+    <main className="min-h-screen overflow-hidden text-white">
+      <section id="home" className="relative mx-auto max-w-7xl px-4 pb-20 pt-16 sm:px-6 lg:pb-28">
+        <div className="absolute inset-x-0 top-0 -z-10 h-[620px] bg-[radial-gradient(circle_at_50%_36%,rgba(236,72,153,0.38),transparent_28rem)]" />
+        <div className="mx-auto overflow-hidden rounded-[2rem] border border-white/10 bg-black/50 p-5 shadow-2xl shadow-pink-950/30 backdrop-blur-xl sm:p-8 lg:p-10">
+          <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.92fr]">
+            <div className="max-w-3xl">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-semibold text-zinc-200">
+                <span className="h-2 w-2 rounded-full bg-pink-400 shadow-[0_0_18px_rgba(244,114,182,0.9)]" />
+                AI floor plan to premium 3D render
+              </div>
+              <h1 className="max-w-4xl text-5xl font-black leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
+                Turn flat plans into <span className="accent-text">cinematic spaces.</span>
+              </h1>
+              <p className="mt-6 max-w-2xl text-base leading-7 text-zinc-300 sm:text-lg">
+                Upload a 2D floor plan and ArchFlow creates a polished top-down architectural visualization for client previews, portfolios, and fast design checks.
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Link to={user ? '/generate' : '/signup'} className="rounded-full px-7 py-3 text-center text-sm font-black text-white glow-button">
+                  Start rendering
+                </Link>
+                <a href="#samples" className="rounded-full border border-white/10 bg-white/5 px-7 py-3 text-center text-sm font-bold text-zinc-100 hover:bg-white/10">
+                  View samples
+                </a>
+              </div>
+              <div className="mt-10 grid max-w-xl grid-cols-3 gap-3">
+                {['Layout scan', 'AI prompt', '3D output'].map((item, i) => (
+                  <div key={item} className="rounded-2xl border border-white/10 bg-white/5 p-3">
+                    <p className="text-xl font-black text-white">0{i + 1}</p>
+                    <p className="mt-1 text-xs text-zinc-400">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-      {/* Home Section */}
-      <section id="home" className="max-w-7xl mx-auto px-6 py-24 flex flex-col items-center text-center">
-        <div className="inline-block bg-amber-400/10 border border-amber-400/20 text-amber-400 text-xs px-4 py-1.5 rounded-full mb-6">
-          AI Powered Floor Plan Visualizer
-        </div>
-        <h1 className="text-5xl font-bold leading-tight mb-6">
-          Transform Your <br />
-          <span className="text-amber-400">2D Floor Plans</span> into <br />
-          3D Renders
-        </h1>
-        <p className="text-zinc-400 text-lg max-w-xl mb-10">
-          Upload your architectural floor plan and let our AI generate a stunning 3D top-down visualization in seconds.
-        </p>
-        <div className="flex gap-4">
-          <Link to="/generate" className="px-8 py-3 bg-amber-400 text-zinc-950 font-bold rounded-full hover:bg-amber-300 transition-colors">
-            Generate Now
-          </Link>
-          <a href="#samples" className="px-8 py-3 border border-zinc-700 text-zinc-300 rounded-full hover:border-amber-400 hover:text-amber-400 transition-colors">
-            View Samples
-          </a>
+            <div className="image-frame relative rounded-[1.75rem] p-3">
+              <div className="absolute inset-x-8 -top-4 h-10 rounded-full bg-pink-500/50 blur-2xl" />
+              <div className="overflow-hidden rounded-[1.25rem] bg-[#070912]">
+                <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+                  <div className="flex items-center gap-2">
+                    <span className="h-3 w-3 rounded-full bg-pink-400" />
+                    <span className="h-3 w-3 rounded-full bg-violet-400" />
+                    <span className="h-3 w-3 rounded-full bg-cyan-300" />
+                  </div>
+                  <span className="text-xs text-zinc-500">ArchFlow Studio</span>
+                </div>
+                <div className="subtle-grid p-4">
+                  <img src={samples[0].url} alt="Generated architectural render" className="h-[360px] w-full rounded-2xl object-cover sm:h-[430px]" />
+                </div>
+                <div className="grid grid-cols-3 gap-2 border-t border-white/10 p-3">
+                  {['3D render', 'Client-ready', 'Saved history'].map((label) => (
+                    <div key={label} className="rounded-xl bg-white/5 px-3 py-2 text-center text-xs text-zinc-300">
+                      {label}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Samples Section */}
-      
-        <section id="samples" className="max-w-7xl mx-auto px-6 py-20">
-          <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-3">Sample <span className="text-amber-400">Renders</span></h2>
-              <p className="text-zinc-400 text-sm">AI-Generated Architectural Visualizations</p>
+      <section id="samples" className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+        <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-[0.28em] text-pink-300">Gallery</p>
+            <h2 className="mt-3 text-4xl font-black tracking-tight">Sample renders</h2>
           </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { url: 'https://res.cloudinary.com/dnekdeqgw/image/upload/v1773174686/jlq4grxl5j1bubvocmao_xh2wlv.png', desc: '2 BHK Modern Apartment' },
-              { url: 'https://res.cloudinary.com/dnekdeqgw/image/upload/v1773175055/1772298643692_2_k7i9dj.jpg', desc: '2 BHK Compact Layout' },
-              { url: 'https://res.cloudinary.com/dnekdeqgw/image/upload/v1773175062/file_000000005db47209a5017ffe3e4cc660_shjhpx.png', desc: 'Luxury Garage Exterior (Coming Soon)' },
-              { url: 'https://res.cloudinary.com/dnekdeqgw/image/upload/v1773172206/archflow/generated/jiyqo5fsnryuduouak89.png', desc: '1 BHK Family Home' },
-            ].map((item, i) => (
-              <div 
-                key={i} 
-                onClick={() => setSelectedImage(item)}
-                className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden group hover:border-amber-400/50 transition-colors cursor-pointer"
-              >
-                <div className="h-56 overflow-hidden">
-                  <img 
-                    src={item.url}   
-                    alt={item.desc}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="p-3">
-                  <p className="text-zinc-400 text-xs">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+          <p className="max-w-xl text-sm leading-6 text-zinc-400">
+            Clean visual direction, rich materials, and presentation-ready outputs generated from simple floor plan inputs.
+          </p>
+        </div>
 
-      {/* Modal */}
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {samples.map((item) => (
+            <button key={item.url} onClick={() => setSelectedImage(item)} className="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 text-left shadow-xl shadow-black/20">
+              <div className="h-64 overflow-hidden">
+                <img src={item.url} alt={item.desc} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+              </div>
+              <div className="p-4">
+                <p className="font-semibold text-white">{item.desc}</p>
+                <p className="mt-1 text-xs text-zinc-500">Tap to inspect</p>
+              </div>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section id="pricing" className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+        <div className="mb-10 text-center">
+          <p className="text-sm font-bold uppercase tracking-[0.28em] text-cyan-300">Pricing</p>
+          <h2 className="mt-3 text-4xl font-black tracking-tight">Choose your render flow</h2>
+        </div>
+        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-5 md:grid-cols-3">
+          {plans.map((plan) => (
+            <div key={plan.name} className={`relative rounded-3xl p-6 ${plan.featured ? 'image-frame shadow-2xl shadow-pink-950/30' : 'soft-card'}`}>
+              {plan.featured && <span className="absolute -top-3 left-6 rounded-full bg-pink-500 px-3 py-1 text-xs font-black text-white">POPULAR</span>}
+              <h3 className="text-xl font-black">{plan.name}</h3>
+              <div className="mt-4 flex items-end gap-2">
+                <p className="text-4xl font-black">{plan.price}</p>
+                <p className="pb-1 text-sm text-zinc-500">{plan.note}</p>
+              </div>
+              <div className="mt-6 space-y-3">
+                {plan.features.map((feature) => (
+                  <p key={feature} className="text-sm text-zinc-300">
+                    <span className="mr-2 text-pink-300">+</span>{feature}
+                  </p>
+                ))}
+              </div>
+              <Link to={user ? '/generate' : '/signup'} className={`mt-8 block rounded-full px-5 py-3 text-center text-sm font-black ${plan.featured ? 'text-white glow-button' : 'border border-white/10 bg-white/5 text-white hover:bg-white/10'}`}>
+                {plan.name === 'Studio' ? 'Contact studio' : 'Get started'}
+              </Link>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {selectedImage && (
-        <div
-          className="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
-          onClick={() => setSelectedImage(null)}
-        >
-          <div
-            className="max-w-4xl w-full px-4"
-            onClick={(e) => e.stopPropagation()} // ✅ FIX
-          >
-            <img
-              src={selectedImage.url}
-              alt={selectedImage.desc}
-              className="w-full max-h-[80vh] object-contain rounded-xl"
-            />
-            <p className="text-center text-white mt-3 text-sm">
-              {selectedImage.desc}
-            </p>
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/90 p-5 backdrop-blur-md" onClick={() => setSelectedImage(null)}>
+          <div className="max-w-5xl" onClick={(e) => e.stopPropagation()}>
+            <img src={selectedImage.url} alt={selectedImage.desc} className="max-h-[82vh] w-full rounded-3xl object-contain" />
+            <p className="mt-3 text-center text-sm text-zinc-300">{selectedImage.desc}</p>
           </div>
         </div>
       )}
 
-
-      {/* Pricing Section */}
-      <section id="pricing" className="max-w-7xl mx-auto px-6 py-20">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-3">Simple <span className="text-amber-400">Pricing</span></h2>
-          <p className="text-zinc-400 text-sm">Start free, upgrade when you need more</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-
-          {/* Free */}
-          <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 flex flex-col">
-            <h3 className="text-lg font-bold mb-1">Free</h3>
-            <p className="text-3xl font-bold text-white mb-1">$0</p>
-            <p className="text-zinc-500 text-xs mb-6">Forever free</p>
-            <ul className="flex flex-col gap-2 mb-8">
-              {['3 renders per month', 'Basic quality', 'Watermark included'].map((f, i) => (
-                <li key={i} className="text-zinc-400 text-sm flex items-center gap-2">
-                  <span className="text-amber-400">✓</span> {f}
-                </li>
-              ))}
-            </ul>
-            <Link 
-                to={user ? "/generate" : "/signup"} 
-                className="mt-auto text-center py-2.5 border border-zinc-700 text-zinc-300 rounded-xl hover:border-amber-400 hover:text-amber-400 transition-colors text-sm"
-              >
-                {user ? "Generate Now" : "Get Started"}
-              </Link>
-          </div>
-
-          {/* Pro */}
-          <div className="bg-zinc-900 border-2 border-amber-400 rounded-2xl p-6 flex flex-col relative">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-zinc-950 text-xs font-bold px-3 py-1 rounded-full">
-              POPULAR
-            </div>
-            <h3 className="text-lg font-bold mb-1">Pro</h3>
-            <p className="text-3xl font-bold text-amber-400 mb-1">$9</p>
-            <p className="text-zinc-500 text-xs mb-6">per month</p>
-            <ul className="flex flex-col gap-2 mb-8">
-              {['50 renders per month', 'High quality', 'No watermark', 'Priority support'].map((f, i) => (
-                <li key={i} className="text-zinc-400 text-sm flex items-center gap-2">
-                  <span className="text-amber-400">✓</span> {f}
-                </li>
-              ))}
-            </ul>
-            <Link 
-            to={user ? "/generate" : "/signup"} className="mt-auto text-center py-2.5 bg-amber-400 text-zinc-950 font-bold rounded-xl hover:bg-amber-300 transition-colors text-sm">
-              {user ? "Coming Soon" : "Get Pro"}
-            </Link>
-          </div>
-
-          {/* Enterprise */}
-          <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 flex flex-col">
-            <h3 className="text-lg font-bold mb-1">Enterprise</h3>
-            <p className="text-3xl font-bold text-white mb-1">$29</p>
-            <p className="text-zinc-500 text-xs mb-6">per month</p>
-            <ul className="flex flex-col gap-2 mb-8">
-              {['Unlimited renders', 'Highest quality', 'No watermark', 'API access', 'Dedicated support'].map((f, i) => (
-                <li key={i} className="text-zinc-400 text-sm flex items-center gap-2">
-                  <span className="text-amber-400">✓</span> {f}
-                </li>
-              ))}
-            </ul>
-            <button
-                onClick={() => {
-                  navigator.clipboard.writeText('faezur@gmail.com')
-                  alert('Email copied!')
-                }}
-                className="mt-auto text-center py-2.5 border border-zinc-700 text-zinc-300 rounded-xl hover:border-amber-400 hover:text-amber-400 transition-colors text-sm w-full"
-              >
-                Contact Us
-              </button>
-          </div>
-
-        </div>
-      </section>
-
-      
-
-      {/* Footer */}
-      <footer className="border-t border-zinc-800 py-8 text-center text-zinc-600 text-sm">
-        © 2026 ArchFlow. All rights reserved.
+      <footer className="border-t border-white/10 px-6 py-8 text-center text-sm text-zinc-500">
+        Copyright 2026 ArchFlow. All rights reserved.
       </footer>
-
-    </div>
+    </main>
   )
 }

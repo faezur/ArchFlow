@@ -1,6 +1,7 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
+import { API_BASE_URL } from '../api/config'
 
 function Login() {
   const navigate = useNavigate()
@@ -9,7 +10,6 @@ function Login() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -17,7 +17,7 @@ function Login() {
     setLoading(true)
     try {
       await login(email, password)
-      navigate('/')
+      navigate('/generate')
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed')
     } finally {
@@ -26,78 +26,55 @@ function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-6">
-      <div className="w-full max-w-md">
-
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 mb-6">
-            <img src="/4.svg" alt="logo" className="w-7 h-7 object-contain"/>
-          <span className="text-white font-bold text-xl tracking-tight">
-              Arch<span className="text-amber-400">Flow</span>
-            </span>
+    <div className="flex min-h-screen items-center justify-center px-4 py-14">
+      <div className="grid w-full max-w-5xl overflow-hidden rounded-[2rem] border border-white/10 bg-black/40 shadow-2xl shadow-black/40 backdrop-blur-xl lg:grid-cols-[0.9fr_1fr]">
+        <div className="hidden bg-[radial-gradient(circle_at_30%_20%,rgba(236,72,153,0.44),transparent_22rem)] p-8 lg:block">
+          <div className="flex h-full flex-col justify-between rounded-3xl border border-white/10 bg-white/5 p-8">
+            <Link to="/" className="flex items-center gap-2">
+              <img src="/4.svg" alt="ArchFlow" className="h-8 w-8" />
+              <span className="text-xl font-black">Arch<span className="accent-text">Flow</span></span>
+            </Link>
+            <div>
+              <p className="text-sm font-bold uppercase tracking-[0.28em] text-pink-200">Welcome back</p>
+              <h1 className="mt-4 text-4xl font-black leading-tight">Resume your rendering workspace.</h1>
+              <p className="mt-4 text-sm leading-6 text-zinc-300">Access saved outputs, generate new 3D visuals, and keep your architectural concepts moving.</p>
+            </div>
           </div>
-          <h1 className="text-2xl font-bold text-white mb-1">Welcome back</h1>
-          <p className="text-zinc-400 text-sm">Login to your account</p>
         </div>
 
-        {/* Form */}
-        <form onSubmit={handleLogin} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col gap-4">
-          
-          {error && (
-            <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-sm px-4 py-3 rounded-xl">
-              {error}
-            </div>
-          )}
-
-          <div className="flex flex-col gap-1.5">
-            <label className="text-zinc-400 text-xs uppercase tracking-wider">Email</label>
-            <input
-              type="email"
-              autoComplete="new-password"
-              placeholder="you@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="bg-zinc-800 border border-zinc-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-400 transition-colors placeholder-zinc-600"
-            />
-          </div>
-
-          <div className="flex flex-col gap-1.5">
-            <label className="text-zinc-400 text-xs uppercase tracking-wider">Password</label>
-            <input
-              type="password"
-              autoComplete="new-password"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="bg-zinc-800 border border-zinc-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-400 transition-colors placeholder-zinc-600"
-            />
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-3 bg-amber-400 text-zinc-950 font-bold rounded-xl hover:bg-amber-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-2"
-          >
-            {loading ? (
-              <>
-                <div className="w-4 h-4 border-2 border-zinc-950 border-t-transparent rounded-full animate-spin"></div>
-                Logging in...
-              </>
-            ) : 'Login'}
-          </button>
-          <button onClick={() => window.location.href = 'https://archflow-backend.onrender.com/api/auth/google'}>
-            Countinue with Google Account...
-          </button>
-
-          <p className="text-center text-zinc-500 text-sm">
-            Don't have an account?{' '}
-            <Link to="/signup" className="text-amber-400 hover:text-amber-300 transition-colors">
-              Sign up
+        <div className="p-6 sm:p-10">
+          <div className="mb-8 lg:hidden">
+            <Link to="/" className="flex items-center gap-2">
+              <img src="/4.svg" alt="ArchFlow" className="h-8 w-8" />
+              <span className="text-xl font-black">Arch<span className="accent-text">Flow</span></span>
             </Link>
-          </p>
+          </div>
+          <h2 className="text-3xl font-black tracking-tight">Login</h2>
+          <p className="mt-2 text-sm text-zinc-400">Enter your details to continue.</p>
 
-        </form>
+          <form onSubmit={handleLogin} className="mt-8 flex flex-col gap-4">
+            {error && <div className="rounded-2xl border border-red-400/20 bg-red-500/10 px-4 py-3 text-sm text-red-300">{error}</div>}
+
+            <label className="flex flex-col gap-2 text-sm font-semibold text-zinc-300">
+              Email
+              <input type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-white outline-none transition focus:border-pink-300" />
+            </label>
+            <label className="flex flex-col gap-2 text-sm font-semibold text-zinc-300">
+              Password
+              <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-white outline-none transition focus:border-pink-300" />
+            </label>
+
+            <button type="submit" disabled={loading} className="mt-2 rounded-full px-5 py-3 text-sm font-black text-white glow-button disabled:cursor-not-allowed disabled:opacity-60">
+              {loading ? 'Logging in...' : 'Login'}
+            </button>
+            <button type="button" onClick={() => window.location.href = `${API_BASE_URL}/auth/google`} className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-bold text-white hover:bg-white/10">
+              Continue with Google
+            </button>
+            <p className="text-center text-sm text-zinc-500">
+              Do not have an account? <Link to="/signup" className="font-bold text-pink-300 hover:text-pink-200">Sign up</Link>
+            </p>
+          </form>
+        </div>
       </div>
     </div>
   )

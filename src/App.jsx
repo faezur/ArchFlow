@@ -13,8 +13,8 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-      <Navbar />
-          <div className="min-h-screen bg-zinc-950 pt-16">
+        <Navbar />
+        <div className="app-shell pt-16">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -23,7 +23,7 @@ function App() {
             <Route path="/generate" element={<ProtectedRoute><Generate /></ProtectedRoute>} />
             <Route path="/history" element={<ProtectedRoute><History /></ProtectedRoute>} />
           </Routes>
-          </div>
+        </div>
       </BrowserRouter>
     </AuthProvider>
   )

@@ -6,6 +6,7 @@ const AuthContext = createContext()
 const DEMO_EMAIL = 'faizan@test.com'
 const DEMO_PASSWORD = '123456'
 
+// eslint-disable-next-line react/prop-types
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
   const [token, setToken] = useState(localStorage.getItem('token'))
@@ -148,6 +149,7 @@ export function AuthProvider({ children }) {
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   return useContext(AuthContext)
 }
