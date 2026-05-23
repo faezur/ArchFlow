@@ -6,7 +6,7 @@ const samples = [
   { url: 'https://res.cloudinary.com/dnekdeqgw/image/upload/v1773174686/jlq4grxl5j1bubvocmao_xh2wlv.png', desc: 'Modern 2 BHK apartment' },
   { url: 'https://res.cloudinary.com/dnekdeqgw/image/upload/v1773175055/1772298643692_2_k7i9dj.jpg', desc: 'Compact urban layout' },
   { url: 'https://res.cloudinary.com/dnekdeqgw/image/upload/v1773175062/file_000000005db47209a5017ffe3e4cc660_shjhpx.png', desc: 'Luxury exterior concept' },
-  { url: 'https://res.cloudinary.com/dnekdeqgw/image/upload/v1773172206/archflow/generated/jiyqo5fsnryuduouak89.png', desc: 'Family home visualization' },
+  { url: 'https://res.cloudinary.com/dnekdeqgw/image/upload/v1775651077/archflow/generated/s6rkawbzajtrsmohdkxb.png', desc: 'Family home visualization' },
 ]
 
 const plans = [
