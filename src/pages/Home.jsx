@@ -31,7 +31,7 @@ export default function Home() {
                 AI floor plan to premium 3D render
               </div>
               <h1 className="max-w-4xl text-5xl font-black leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
-                Turn flat plans into <span className="accent-text">cinematic spaces.</span>
+                Turn flat plans into <span className="accent-text">cinematic spaces</span>
               </h1>
               <p className="mt-6 max-w-2xl text-base leading-7 text-zinc-300 sm:text-lg">
                 Upload a 2D floor plan and ArchFlow creates a polished top-down architectural visualization for client previews, portfolios, and fast design checks.
@@ -65,8 +65,20 @@ export default function Home() {
                   </div>
                   <span className="text-xs text-zinc-500">ArchFlow Studio</span>
                 </div>
+                
                 <div className="subtle-grid p-4">
-                  <img src={samples[0].url} alt="Generated architectural render" className="h-[360px] w-full rounded-2xl object-cover sm:h-[430px]" />
+                        
+                  <button onClick={() => setSelectedImage("./screenshot/sampleHome.png")} className="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 text-left shadow-xl shadow-black/20">
+                    <div className="overflow-hidden flex items-center justify-center">
+                      <img
+                        src="/screenshot/sampleHome.png"
+                        alt="Generated architectural render"
+                        className="max-h-full max-w-full object-contain rounded-xl shadow-lg"
+                      />
+                    </div>
+                    
+                  </button>
+                 
                 </div>
                 <div className="grid grid-cols-3 gap-2 border-t border-white/10 p-3">
                   {['3D render', 'Client-ready', 'Saved history'].map((label) => (
@@ -139,8 +151,14 @@ export default function Home() {
       {selectedImage && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/90 p-5 backdrop-blur-md" onClick={() => setSelectedImage(null)}>
           <div className="max-w-5xl" onClick={(e) => e.stopPropagation()}>
-            <img src={selectedImage.url} alt={selectedImage.desc} className="max-h-[82vh] w-full rounded-3xl object-contain" />
-            <p className="mt-3 text-center text-sm text-zinc-300">{selectedImage.desc}</p>
+            <img
+              src={selectedImage?.url || selectedImage}
+              alt={selectedImage?.desc || "image"}
+              className="max-h-[82vh] w-full rounded-3xl object-contain"
+            />
+            <p className="mt-3 text-center text-sm text-zinc-300">
+              {selectedImage?.desc}
+            </p>
           </div>
         </div>
       )}
@@ -148,6 +166,7 @@ export default function Home() {
       <footer className="border-t border-white/10 px-6 py-8 text-center text-sm text-zinc-500">
         Copyright 2026 ArchFlow. All rights reserved.
       </footer>
+      
     </main>
   )
 }
