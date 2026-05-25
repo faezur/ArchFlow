@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useState } from 'react'
 
+
 const samples = [
   { url: 'https://res.cloudinary.com/dnekdeqgw/image/upload/v1773174686/jlq4grxl5j1bubvocmao_xh2wlv.png', desc: 'Modern 2 BHK apartment' },
   { url: 'https://res.cloudinary.com/dnekdeqgw/image/upload/v1773175055/1772298643692_2_k7i9dj.jpg', desc: 'Compact urban layout' },
