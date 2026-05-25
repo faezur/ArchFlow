@@ -55,7 +55,7 @@ export default function History() {
     <div className="flex min-h-screen items-center justify-center">
       <div className="flex flex-col items-center gap-4">
         <div className="h-9 w-9 animate-spin rounded-full border-2 border-pink-300 border-t-transparent" />
-        <p className="text-xs font-bold uppercase tracking-[0.28em] text-zinc-500">Loading history</p>
+        <p className="text-xs font-bold uppercase tracking-[0.28em] text-zinc-500">Loading history... This may take a few seconds as we fine-tune our system</p>
       </div>
     </div>
   )

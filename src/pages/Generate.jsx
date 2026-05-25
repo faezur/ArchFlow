@@ -139,7 +139,7 @@ export default function Generate() {
   if (loading) return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4">
       <div className="h-10 w-10 animate-spin rounded-full border-2 border-pink-300 border-t-transparent" />
-      <p className="text-xs font-bold uppercase tracking-[0.28em] text-zinc-500">Loading workspace</p>
+      <p className="text-xs font-bold uppercase tracking-[0.28em] text-zinc-500">Loading workspace... This may take a few seconds as we fine-tune our system</p>
     </div>
   )
 
